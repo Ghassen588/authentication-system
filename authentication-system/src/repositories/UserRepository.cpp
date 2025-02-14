@@ -24,3 +24,16 @@ User UserRepository::findUser(const std::string& username) {
     }
     return User("", "", "");
 }
+bool UserRepository::isUsernameTaken(const std::string& username) {
+    std::vector<std::string> lines = FileHandler::readFile(filename);
+    for (const std::string& line : lines) {
+        size_t pos = line.find(',');
+        if (pos != std::string::npos) {
+            std::string storedUsername = line.substr(0, pos);
+            if (storedUsername == username) {
+                return true; // Username already exists
+            }
+        }
+    }
+    return false; // Username is available
+}
