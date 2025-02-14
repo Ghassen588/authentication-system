@@ -4,6 +4,7 @@
 
 int main() {
     AuthenticationService authService;
+    UserRepository userRepository;
     std::string choice;
     std::string username, password;
 
@@ -20,15 +21,18 @@ int main() {
 
         // Handle the valid choice
         if (choice == "1") {
-            std::cout << "Enter username: ";
-            std::cin >> username;
-            std::cout << "Enter password: ";
-            std::cin >> password;
-            if (authService.registerUser(username, password)) {
-                std::cout << "Registration successful!\n";
-            } else {
-                std::cout << "Registration failed!\n";
-            }
+              while(true){
+                    std::cout << "Enter username: ";
+                    std::cin >> username;
+                    std::cout << "Enter password: ";
+                    std::cin >> password;
+                    if (authService.registerUser(username, password)) {
+                             std::cout << "Registration successful!\n";
+                             break;
+                    } else {
+                             std::cout << "Registration failed!\n";
+                    }
+               }
         } else if (choice == "2") {
             std::cout << "Enter username: ";
             std::cin >> username;
@@ -47,4 +51,3 @@ int main() {
 
     return 0;
 }
-       
